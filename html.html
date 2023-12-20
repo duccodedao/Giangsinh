@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Christmas Day</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff;
+            color: #ecf0f1;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #checkButton {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: 2px solid #27ae60;
+            background-color: #27ae60;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            position: relative;
+        }
+
+        #checkButton:hover {
+            background-color: #ffffff;
+            color: #27ae60;
+            border-color: #ffffff;
+        }
+
+        #checkButton:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 5px;
+            background: radial-gradient(circle at 20% 50%, transparent 10%, #27ae60 20%);
+            z-index: -1;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        #checkButton:hover:before {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <button id="checkButton">Kiểm tra Giáng Sinh</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById("checkButton").addEventListener("click", function() {
+            var christmasDate = new Date("December 25, " + new Date().getFullYear());
+            var currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0);
+
+            if (currentDate.getTime() === christmasDate.getTime()) {
+                showAlert("Chúc mừng!", "Hôm nay là Giáng Sinh!", "success");
+            } else if (currentDate.getTime() < christmasDate.getTime()) {
+                showAlert("Thông báo", "Chưa tới Giáng Sinh. Hãy chờ đến ngày 25 tháng 12.", "info");
+            } else {
+                // Nếu đã qua Giáng Sinh, không hiển thị thông báo
+                // Chuyển hướng đến đường link khi người dùng nhấn nút
+                window.location.href = "index2.html"; // Thay đổi đường link theo ý muốn của bạn
+            }
+        });
+
+        function showAlert(title, text, icon) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon,
+                confirmButtonColor: '#27ae60',
+            });
+        }
+    </script>
+</body>
+</html>
